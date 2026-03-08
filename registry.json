@@ -10,8 +10,8 @@
       "description": "An example registry component.",
       "files": [
         {
-          "path": "registry/ui/hello-world.tsx",
-          "type": "registry:ui",
+          "path": "registry/new-york/hello-world/hello-world.tsx",
+          "type": "registry:component",
           "target": "components/ui/hello-world.tsx"
         }
       ]
