@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ui",
+  "homepage": "",
+  "items": [
+    {
+      "name": "hello-world",
+      "type": "registry:ui",
+      "title": "Hello World",
+      "description": "An example registry component.",
+      "files": [
+        {
+          "path": "registry/ui/hello-world.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hello-world.tsx"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Synergy Shock - UI",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "features": {},
+  "mounts": [
+    "source=pnpm-store,target=/home/node/.pnpm-store,type=volume",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/node/.aws,type=bind,readonly",
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+      },
+    },
+  },
+  "runArgs": ["--name", "ui"],
+  "forwardPorts": [4321],
+  "postCreateCommand": "npm install -g pnpm && pnpm config set store-dir /home/node/.pnpm-store && pnpm install",
+  "remoteUser": "node",
+}
