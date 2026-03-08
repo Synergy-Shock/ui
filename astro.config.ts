@@ -20,14 +20,17 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/synergy-shock/ui",
         },
       ],
       sidebar: [
         {
+          label: "Components",
+          autogenerate: { directory: "components" },
+        },
+        {
           label: "Guides",
           items: [
-            // Each item here is one entry in the navigation menu.
             { label: "Example Guide", slug: "guides/example" },
           ],
         },

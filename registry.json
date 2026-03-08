@@ -4,17 +4,18 @@
   "homepage": "",
   "items": [
     {
-      "name": "hello-world",
+      "name": "orb",
       "type": "registry:ui",
-      "title": "Hello World",
-      "description": "An example registry component.",
+      "title": "Orb",
+      "description": "A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.",
       "files": [
         {
-          "path": "registry/new-york/hello-world/hello-world.tsx",
+          "path": "registry/new-york/orb/orb.tsx",
           "type": "registry:component",
-          "target": "components/ui/hello-world.tsx"
+          "target": "components/ui/orb.tsx"
         }
-      ]
+      ],
+      "dependencies": ["react", "react-dom"]
     }
   ]
 }
