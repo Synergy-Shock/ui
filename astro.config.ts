@@ -2,7 +2,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import react from "@astrojs/react";
-import cloudflare from "@astrojs/cloudflare";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -31,9 +30,7 @@ export default defineConfig({
         },
         {
           label: "Guides",
-          items: [
-            { label: "Example Guide", slug: "guides/example" },
-          ],
+          items: [{ label: "Example Guide", slug: "guides/example" }],
         },
         {
           label: "Reference",
@@ -48,8 +45,7 @@ export default defineConfig({
     allowedHosts: ["ui.orb.local", "localhost"],
   },
 
-  output: "server",
-  adapter: cloudflare(),
+  output: "static",
 
   vite: {
     plugins: [tailwindcss()],
