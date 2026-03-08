@@ -30,9 +30,7 @@ export default defineConfig({
         },
         {
           label: "Guides",
-          items: [
-            { label: "Example Guide", slug: "guides/example" },
-          ],
+          items: [{ label: "Example Guide", slug: "guides/example" }],
         },
         {
           label: "Reference",
@@ -47,7 +45,13 @@ export default defineConfig({
     allowedHosts: ["ui.orb.local", "localhost"],
   },
 
+  output: "static",
+
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      // Ensure Node.js built-ins resolve correctly for Cloudflare Workers
+      conditions: ["workerd", "worker", "browser"],
+    },
   },
 });

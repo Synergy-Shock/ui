@@ -10,7 +10,7 @@
       "description": "A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.",
       "files": [
         {
-          "path": "registry/new-york/orb/orb.tsx",
+          "path": "src/registry/new-york/orb/orb.tsx",
           "type": "registry:component",
           "target": "components/ui/orb.tsx"
         }
