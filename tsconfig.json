@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/registry/*": ["./registry/*"]
+      "@/registry/*": ["./src/registry/*"]
     }
   }
 }
