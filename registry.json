@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ui",
+  "homepage": "",
+  "items": [
+    {
+      "name": "orb",
+      "type": "registry:ui",
+      "title": "Orb",
+      "description": "A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.",
+      "files": [
+        {
+          "path": "registry/new-york/orb/orb.tsx",
+          "type": "registry:component",
+          "target": "components/ui/orb.tsx"
+        }
+      ],
+      "dependencies": ["react", "react-dom"]
+    }
+  ]
+}

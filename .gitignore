@@ -1,7 +1,11 @@
 # build output
 dist/
+public/r/
 # generated types
 .astro/
+.claude/
+.agents/
+.opencode/
 
 # dependencies
 node_modules/
@@ -19,3 +23,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+.agents
+.claude
+skills-lock.json
