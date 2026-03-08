@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import react from "@astrojs/react";
+import cloudflare from "@astrojs/cloudflare";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -47,7 +48,14 @@ export default defineConfig({
     allowedHosts: ["ui.orb.local", "localhost"],
   },
 
+  output: "server",
+  adapter: cloudflare(),
+
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      // Ensure Node.js built-ins resolve correctly for Cloudflare Workers
+      conditions: ["workerd", "worker", "browser"],
+    },
   },
 });
