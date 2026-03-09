@@ -1,49 +1,62 @@
-# Starlight Starter Kit: Basics
+# UI Component Registry & Documentation
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+This project is a UI component library and documentation site built with [Astro](https://astro.build), [Starlight](https://starlight.astro.build/), React, Tailwind CSS, and Shadcn UI. It is configured to be deployed on Cloudflare Workers.
 
-```
-pnpm create astro@latest -- --template starlight
-```
+## 📦 Prerequisites
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- **Node.js**: Ensure you have Node.js installed.
+- **Package Manager**: This project strictly uses `pnpm`.
 
-## 🚀 Project Structure
+## 🛠️ Setup & Installation
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Install the project dependencies using `pnpm`:
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+pnpm install
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## ⚙️ Environment Variables
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+Create a `.env` file in the root of your project to override default configurations if necessary:
 
-Static assets, like favicons, can be placed in the `public/` directory.
+| Variable | Description | Default |
+| :--- | :--- | :--- |
+| `PUBLIC_REGISTRY_URL` | The base URL for the Shadcn UI registry (used by the CLI to fetch components). | `http://localhost:4321` |
 
-## 🧞 Commands
+## 💻 Local Development
 
-All commands are run from the root of the project, from a terminal:
+To start the local development server:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```bash
+pnpm dev
+```
 
-## 👀 Want to learn more?
+This will start the Astro dev server.
+- **Host**: Bound to `0.0.0.0`
+- **Allowed Hosts**: `localhost` and `ui.orb.local`
+- **Access**: Open [http://localhost:4321](http://localhost:4321) (or `http://ui.orb.local:4321` if you have configured your local DNS/hosts file).
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+## 🏗️ Build Process
+
+The build process is a two-step sequence that first builds the Shadcn UI registry, then generates the static Astro site.
+
+To build the project for production:
+
+```bash
+pnpm build
+```
+
+Behind the scenes, this runs:
+1. **`pnpm registry:build`**: Uses `npx shadcn@latest build` to generate the registry files.
+2. **`astro build`**: Builds the static documentation site and outputs assets to the `./dist/` directory.
+
+## 🚀 Deployment
+
+This project is configured for deployment to Cloudflare using the Cloudflare Pages GitHub integration. **Deployment is only available by merging to the `main` branch** - automated deployments are triggered upon merge.
+
+- **Deployment Method**: Cloudflare GitHub integration
+- **Trigger**: Push/merge to `main` branch
+- **Compatibility Date**: `2025-10-08`
+- **Main Entrypoint**: `src/api.ts` (handles dynamic worker logic)
+- **Static Assets**: Served directly from the `./dist/` directory (`ASSETS` binding)
+- **Node.js Compatibility**: Enabled via `nodejs_compat` flag

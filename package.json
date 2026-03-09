@@ -6,7 +6,7 @@
     "dev": "astro dev --host 0.0.0.0",
     "start": "astro dev",
     "build": "pnpm registry:build && astro build",
-    "registry:build": "npx shadcn@latest build",
+    "registry:build": "mkdir -p public/r/synergy && npx shadcn@latest build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -31,5 +31,9 @@
     "tailwindcss": "^4.2.1",
     "three": "^0.183.2",
     "wrangler": "^4.71.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "typescript": "^5.9.3"
   }
 }

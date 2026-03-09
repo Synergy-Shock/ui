@@ -1,0 +1,87 @@
+---
+title: Background
+description: A 3D Simplex noise pure WebGL background component mapping four seamless colors for an animated, flowing gradient.
+---
+
+import { BackgroundDemo } from './background/background-demo'
+import { Background } from '@/registry/synergy/background'
+import { RegistryInstall } from '@/components/registry-install'
+import { Aside } from '@astrojs/starlight/components'
+
+A visually stunning, pure WebGL background component using 3D Simplex noise to blend four elegant colors seamlessly over time. The shader evaluates coordinates against time completely on the GPU, avoiding calculation overhead between frames in JavaScript.
+
+<BackgroundDemo client:load />
+
+## Installation
+
+<RegistryInstall name="synergy/background" client:load />
+
+## Usage
+
+```tsx
+import { Background } from "@/components/ui/synergy/background"
+
+export default function App() {
+  return (
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      <Background zoom={0.8} speed={0.5} className="absolute inset-0 z-0" />
+      <div style={{ position: 'relative', zIndex: 10, color: 'white' }}>
+        Your content goes here!
+      </div>
+    </div>
+  )
+}
+```
+
+## Examples
+
+### Zoom Configuration
+
+Adjust the `zoom` prop to scale the noise pattern. Values closer to `0` stretch the gradient gracefully (larger features), while values closer to `1` create tighter, more intricate flow patterns.
+
+<div style={{ position: "relative", width: "100%", height: 300, borderRadius: 12, overflow: "hidden", marginTop: 24, border: "1px solid var(--border)" }}>
+  <Background zoom={0.1} client:load className="absolute inset-0" />
+</div>
+
+```tsx
+<Background zoom={0.1} />
+```
+
+### Speed Configuration
+
+Modify the `speed` prop to control how fast the flow shifts over time. A smaller number creates a subtle ambiance.
+
+<div style={{ position: "relative", width: "100%", height: 300, borderRadius: 12, overflow: "hidden", marginTop: 24, border: "1px solid var(--border)" }}>
+  <Background speed={0.8} zoom={0.5} client:load className="absolute inset-0" />
+</div>
+
+```tsx
+<Background speed={0.8} zoom={0.5} />
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `zoom` | `number` | `0.25` | Controls the scale of the noise pattern. |
+| `speed` | `number` | `0.5` | Multiplier for the animation speed. |
+| `className` | `string` | — | Custom CSS class for the canvas container. |
+| `...props` | `CanvasHTMLAttributes` | — | Any standard HTML canvas attributes like `style`, `id`, `onClick`, etc. |
+
+## Notes
+
+The component uses raw **WebGL** shaders — no external dependencies or large libraries (like Three.js) are needed.
+
+Time management, scaling, and resolution checks occur quickly in JavaScript, while math-heavy noise generation is entirely isolated on the GPU hardware.
+
+A basic `ResizeObserver` pattern is utilized to re-adjust coordinates if the canvas dimensions change, maintaining a crisp aspect ratio.
+
+The canvas automatically handles **device pixel ratio** for sharp rendering on high-DPI displays.
+
+The component properly cleans up WebGL resources on unmount.
+
+<Aside type="caution" title="Important Limitations & Details">
+Browsers strictly limit the number of active WebGL contexts per page (typically 8 to 16). Be mindful of this limit when rendering multiple instances of the `<Background />` component simultaneously. If you hit the limit, older contexts will be dropped.
+</Aside>
