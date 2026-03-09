@@ -1,0 +1,130 @@
+---
+import config from "virtual:starlight/user-config";
+
+import LanguageSelect from "virtual:starlight/components/LanguageSelect";
+import Search from "virtual:starlight/components/Search";
+import SiteTitle from "virtual:starlight/components/SiteTitle";
+import SocialIcons from "virtual:starlight/components/SocialIcons";
+import ThemeSelect from "virtual:starlight/components/ThemeSelect";
+
+const shouldRenderSearch =
+    config.pagefind ||
+    config.components.Search !== "@astrojs/starlight/components/Search.astro";
+
+const navLinks = [{ label: "Components", href: "/components/background" }];
+---
+
+<div class="header">
+    <div class="title-wrapper sl-flex">
+        <SiteTitle />
+
+        <nav class="header-nav ml-5">
+            {navLinks.map(({ label, href }) => <a href={href}>{label}</a>)}
+        </nav>
+    </div>
+    <div class="sl-flex print:hidden"></div>
+    <div class="sl-hidden md:sl-flex print:hidden right-group">
+        {shouldRenderSearch && <Search />}
+        <div class="sl-flex social-icons">
+            <SocialIcons />
+        </div>
+        <ThemeSelect />
+        <LanguageSelect />
+    </div>
+</div>
+
+<style>
+    @layer starlight.components {
+        .header {
+            display: flex;
+            gap: var(--sl-nav-gap);
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .title-wrapper {
+            overflow: clip;
+            padding: 0.25rem;
+            margin: -0.25rem;
+            min-width: 0;
+        }
+
+        .right-group,
+        .social-icons {
+            gap: 1rem;
+            align-items: center;
+        }
+        .right-group {
+            justify-content: flex-end;
+        }
+        .social-icons::after {
+            content: "";
+            height: 2rem;
+            border-inline-end: 1px solid var(--sl-color-gray-5);
+        }
+
+        .right-group :global(site-search) {
+            flex-grow: 1;
+        }
+        .right-group :global(button[data-open-modal]) {
+            max-width: 20rem;
+            width: 100%;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+        .header-nav a {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        .header-nav a:hover {
+            color: hsl(var(--foreground));
+        }
+
+        @media (min-width: 50rem) {
+            :global(:root[data-has-sidebar]) {
+                --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+            }
+            :global(:root:not([data-has-toc])) {
+                --__toc-width: 0rem;
+            }
+            .header {
+                --__sidebar-width: max(
+                    0rem,
+                    var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)
+                );
+                --__main-column-fr: calc(
+                    (
+                            100% + var(--__sidebar-pad, 0rem) -
+                                var(--__toc-width, var(--sl-sidebar-width)) -
+                                (2 * var(--__toc-width, var(--sl-nav-pad-x))) -
+                                var(--sl-content-inline-start, 0rem) -
+                                var(--sl-content-width)
+                        ) /
+                        2
+                );
+                display: grid;
+                grid-template-columns:
+                    minmax(
+                        calc(
+                            var(--__sidebar-width) +
+                                max(
+                                    0rem,
+                                    var(--__main-column-fr) - var(--sl-nav-gap)
+                                )
+                        ),
+                        auto
+                    )
+                    auto
+                    1fr;
+                align-content: center;
+            }
+        }
+    }
+</style>

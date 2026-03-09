@@ -4,7 +4,7 @@
   "homepage": "",
   "items": [
     {
-      "name": "orb",
+      "name": "synergy/orb",
       "type": "registry:ui",
       "title": "Orb",
       "description": "A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.",
@@ -12,7 +12,21 @@
         {
           "path": "src/registry/new-york/orb/orb.tsx",
           "type": "registry:component",
-          "target": "components/ui/orb.tsx"
+          "target": "components/ui/synergy/orb.tsx"
+        }
+      ],
+      "dependencies": ["react", "react-dom"]
+    },
+    {
+      "name": "synergy/background",
+      "type": "registry:ui",
+      "title": "Background (Synergy)",
+      "description": "A pure WebGL background component using 3D Simplex noise to smoothly animate a 4-color gradient.",
+      "files": [
+        {
+          "path": "src/registry/synergy/background.tsx",
+          "type": "registry:component",
+          "target": "components/ui/synergy/background.tsx"
         }
       ],
       "dependencies": ["react", "react-dom"]

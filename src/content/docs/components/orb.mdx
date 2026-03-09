@@ -3,8 +3,10 @@ title: Orb
 description: A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.
 ---
 
-import { OrbDemo, OrbColorsDemo, OrbAgentStateDemo, OrbVolumeDemo } from '../../../components/demo/orb-demo'
-import { RegistryInstall } from '../../../components/registry-install'
+import { OrbDemo } from './orb/orb-demo'
+import { Orb } from '@/registry/new-york/orb/orb'
+import { RegistryInstall } from '@/components/registry-install'
+import { Aside } from '@astrojs/starlight/components'
 
 A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.
 
@@ -12,22 +14,12 @@ A 2D animated orb with audio reactivity, custom colors, and agent state visualiz
 
 ## Installation
 
-### CLI
-
-<RegistryInstall name="orb" />
-
-### Manual
-
-Copy the component source into your project:
-
-```bash
-cp orb.tsx components/ui/orb.tsx
-```
+<RegistryInstall name="synergy/orb" client:load />
 
 ## Usage
 
 ```tsx
-import { Orb } from "@/components/ui/orb"
+import { Orb } from "@/components/ui/synergy/orb"
 
 export default function App() {
   return (
@@ -44,58 +36,47 @@ export default function App() {
 
 Specify gradient colors via the `colors` prop.
 
-<OrbColorsDemo client:load />
+<div  className="flex py-4 w-full">
+  <Orb colors={["#ffb84b", "#4975d6", "#79b853"]} client:load />
+</div>
 
 ```tsx
+<Orb colors={["#FF6B6B"]} />
 <Orb colors={["#FF6B6B", "#4ECDC4"]} />
+<Orb colors={["#FF6B6B", "#4ECDC4", "#FFFFFF"]} />
 ```
 
 ### Agent State
 
 Manage visual states to reflect the agent's current activity.
 
-<OrbAgentStateDemo client:load />
-
 ```tsx
-import { useState } from "react"
-import { Orb, type AgentState } from "@/components/ui/orb"
-
-export function AgentOrb() {
-  const [state, setState] = useState<AgentState>(null)
-
-  return (
-    <div>
-      <div style={{ width: 300, height: 300 }}>
-        <Orb agentState={state} />
-      </div>
-      <div>
-        <button onClick={() => setState(null)}>Idle</button>
-        <button onClick={() => setState("thinking")}>Thinking</button>
-        <button onClick={() => setState("listening")}>Listening</button>
-        <button onClick={() => setState("talking")}>Talking</button>
-      </div>
-    </div>
-  )
-}
+<Orb agentState="idle" />
+<Orb agentState="thinking" />
+<Orb agentState="listening" />
+<Orb agentState="talking" />
 ```
 
 ### Manual Volume Control
 
-Directly control input and output volume values with sliders.
+Directly control input and output volume values.
 
-<OrbVolumeDemo client:load />
+<div  className="flex py-4 w-full">
+  <Orb inputVolume={0.5} outputVolume={0.8} colors={["#FF6B6B"]} client:load />
+</div>
 
 ```tsx
-<Orb
-  volumeMode="manual"
-  manualInput={0.5}
-  manualOutput={0.8}
-/>
+<Orb inputVolume={0.5} outputVolume={0.8} />
 ```
 
 ### Custom Seed
 
 Use a fixed seed for consistent animation patterns across renders.
+
+<div  className="flex py-4 w-full">
+  <Orb seed={1} colors={["#4975d6"]} client:load />
+  <Orb seed={2} colors={["#4975d6"]} client:load />
+</div>
 
 ```tsx
 <Orb seed={42} />
@@ -107,7 +88,6 @@ Use callback functions to provide real-time volume data.
 
 ```tsx
 <Orb
-  volumeMode="auto"
   getInputVolume={() => microphoneLevel}
   getOutputVolume={() => speakerLevel}
 />
@@ -119,18 +99,13 @@ Use callback functions to provide real-time volume data.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `colors` | `[string, string]` | `["#CADCFC", "#A0B9D1"]` | Gradient color pair as hex strings. |
-| `colorsRef` | `React.RefObject<[string, string]>` | — | Ref-based color updates for performance-sensitive use cases. |
+| `colors` | `[string] \| [string, string] \| [string, string, string]` | `["#CADCFC", "#A0B9D1", "#FFFFFF"]` | Color ramp. 1 color: `[c, c, white]`. 2 colors: `[c1, c1, c2]`. 3 colors: as-is. |
 | `seed` | `number` | Random | Seed for consistent animation patterns. |
-| `agentState` | `AgentState` | `null` | Visual state of the agent. |
-| `volumeMode` | `"auto" \| "manual"` | `"auto"` | Volume control mode. |
-| `manualInput` | `number` | `0` | Manual input volume (0–1). Used when `volumeMode` is `"manual"`. |
-| `manualOutput` | `number` | `0` | Manual output volume (0–1). Used when `volumeMode` is `"manual"`. |
-| `inputVolumeRef` | `React.RefObject<number>` | — | Ref-based input volume for high-frequency updates. |
-| `outputVolumeRef` | `React.RefObject<number>` | — | Ref-based output volume for high-frequency updates. |
-| `getInputVolume` | `() => number` | — | Callback to get current input volume. |
-| `getOutputVolume` | `() => number` | — | Callback to get current output volume. |
-| `resizeDebounce` | `number` | `100` | Debounce time (ms) for canvas resize handling. |
+| `agentState` | `AgentState` | `"idle"` | Visual state of the agent. |
+| `inputVolume` | `number` | — | Input volume (0–1). Providing any volume prop switches to manual mode. |
+| `outputVolume` | `number` | — | Output volume (0–1). Providing any volume prop switches to manual mode. |
+| `getInputVolume` | `() => number` | — | Callback to get current input volume. Switches to manual mode. |
+| `getOutputVolume` | `() => number` | — | Callback to get current output volume. Switches to manual mode. |
 | `className` | `string` | `"relative h-full w-full"` | Custom CSS class for the container. |
 
 ### AgentState
@@ -148,8 +123,12 @@ type AgentState = null | "thinking" | "listening" | "talking"
 
 ## Notes
 
-- The component uses raw **WebGL** shaders — no Three.js dependency required.
-- A Perlin noise texture is loaded from an external CDN for the flow distortion effect.
-- The canvas automatically handles **device pixel ratio** for sharp rendering on high-DPI displays.
-- Colors transition smoothly via linear interpolation when updated.
-- The component properly cleans up WebGL resources on unmount.
+The component uses raw **WebGL** shaders — no Three.js dependency required.
+
+The canvas automatically handles **device pixel ratio** for sharp rendering on high-DPI displays.
+
+The component properly cleans up WebGL resources on unmount.
+
+<Aside type="caution" title="Important Limitations & Details">
+Browsers strictly limit the number of active WebGL contexts per page (typically 8 to 16). Be mindful of this limit when rendering multiple instances of the `<Orb />` component simultaneously. If you hit the limit, older contexts will be dropped.
+</Aside>

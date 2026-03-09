@@ -15,6 +15,9 @@ export default defineConfig({
         light: "./public/logo-light.svg",
         replacesTitle: true,
       },
+      components: {
+        Header: "./src/components/Header.astro",
+      },
       customCss: ["./src/styles/global.css"],
       social: [
         {
@@ -28,14 +31,14 @@ export default defineConfig({
           label: "Components",
           autogenerate: { directory: "components" },
         },
-        {
-          label: "Guides",
-          items: [{ label: "Example Guide", slug: "guides/example" }],
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
-        },
+        // {
+        //   label: "Guides",
+        //   items: [{ label: "Example Guide", slug: "guides/example" }],
+        // },
+        // {
+        //   label: "Reference",
+        //   autogenerate: { directory: "reference" },
+        // },
       ],
     }),
     react(),
