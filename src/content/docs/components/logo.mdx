@@ -1,0 +1,67 @@
+---
+title: Logo
+description: The Synergy wordmark logo as an SVG component.
+---
+
+import { Logo } from '@/registry/synergy/logo'
+import { RegistryInstall } from '@/components/registry-install'
+
+The Synergy wordmark logo rendered as an inline SVG. Inherits `currentColor` for easy theming.
+
+<div className="flex py-8 w-full justify-center">
+  <Logo client:load className="h-12" />
+</div>
+
+## Installation
+
+<RegistryInstall name="synergy/logo" client:load />
+
+## Usage
+
+```tsx
+import { Logo } from "@/components/ui/synergy/logo"
+
+export default function App() {
+  return <Logo className="h-8" />
+}
+```
+
+## Examples
+
+### Sizing
+
+Control the size with standard Tailwind utilities.
+
+<div className="flex items-center gap-8 py-4 w-full justify-center">
+  <Logo client:load className="h-6" />
+  <Logo client:load className="h-10" />
+  <Logo client:load className="h-16" />
+</div>
+
+```tsx
+<Logo className="h-6" />
+<Logo className="h-10" />
+<Logo className="h-16" />
+```
+
+### Custom Color
+
+The SVG uses `currentColor`, so set the color with Tailwind or inline styles.
+
+<div className="flex items-center gap-8 py-4 w-full justify-center">
+  <Logo client:load className="h-10 text-blue-500" />
+  <Logo client:load className="h-10 text-emerald-500" />
+</div>
+
+```tsx
+<Logo className="h-10 text-blue-500" />
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | CSS class applied to the `<svg>` element. |
+| `...props` | `React.ComponentProps<"svg">` | — | Any standard SVG attributes. |

@@ -1,0 +1,67 @@
+---
+title: Icon
+description: The Synergy icon mark as an SVG component.
+---
+
+import { Icon } from '@/registry/synergy/icon'
+import { RegistryInstall } from '@/components/registry-install'
+
+The Synergy icon mark rendered as an inline SVG. Inherits `currentColor` for easy theming.
+
+<div className="flex py-8 w-full justify-center">
+  <Icon client:load className="h-16 w-16" />
+</div>
+
+## Installation
+
+<RegistryInstall name="synergy/icon" client:load />
+
+## Usage
+
+```tsx
+import { Icon } from "@/components/ui/synergy/icon"
+
+export default function App() {
+  return <Icon className="h-8 w-8" />
+}
+```
+
+## Examples
+
+### Sizing
+
+Control the size with standard Tailwind utilities.
+
+<div className="flex items-center gap-8 py-4 w-full justify-center">
+  <Icon client:load className="h-6 w-6" />
+  <Icon client:load className="h-10 w-10" />
+  <Icon client:load className="h-16 w-16" />
+</div>
+
+```tsx
+<Icon className="h-6 w-6" />
+<Icon className="h-10 w-10" />
+<Icon className="h-16 w-16" />
+```
+
+### Custom Color
+
+The SVG uses `currentColor`, so set the color with Tailwind or inline styles.
+
+<div className="flex items-center gap-8 py-4 w-full justify-center">
+  <Icon client:load className="h-10 w-10 text-blue-500" />
+  <Icon client:load className="h-10 w-10 text-emerald-500" />
+</div>
+
+```tsx
+<Icon className="h-10 w-10 text-blue-500" />
+```
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | CSS class applied to the `<svg>` element. |
+| `...props` | `React.ComponentProps<"svg">` | — | Any standard SVG attributes. |
