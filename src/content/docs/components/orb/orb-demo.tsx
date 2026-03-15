@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Orb, type AgentState } from "@/registry/new-york/orb/orb";
+import { Orb, type AgentState } from "@/registry/new-york/orb";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Button } from "@/components/ui/button";
 

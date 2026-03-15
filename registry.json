@@ -10,7 +10,7 @@
       "description": "A 2D animated orb with audio reactivity, custom colors, and agent state visualization built with WebGL shaders.",
       "files": [
         {
-          "path": "src/registry/new-york/orb/orb.tsx",
+          "path": "src/registry/new-york/orb.tsx",
           "type": "registry:component",
           "target": "components/ui/synergy/orb.tsx"
         }
@@ -27,6 +27,34 @@
           "path": "src/registry/synergy/background.tsx",
           "type": "registry:component",
           "target": "components/ui/synergy/background.tsx"
+        }
+      ],
+      "dependencies": ["react", "react-dom"]
+    },
+    {
+      "name": "synergy/logo",
+      "type": "registry:ui",
+      "title": "Logo (Synergy)",
+      "description": "The Synergy wordmark logo as an SVG component.",
+      "files": [
+        {
+          "path": "src/registry/synergy/logo.tsx",
+          "type": "registry:component",
+          "target": "components/ui/synergy/logo.tsx"
+        }
+      ],
+      "dependencies": ["react", "react-dom"]
+    },
+    {
+      "name": "synergy/icon",
+      "type": "registry:ui",
+      "title": "Icon (Synergy)",
+      "description": "The Synergy icon mark as an SVG component.",
+      "files": [
+        {
+          "path": "src/registry/synergy/icon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/synergy/icon.tsx"
         }
       ],
       "dependencies": ["react", "react-dom"]
