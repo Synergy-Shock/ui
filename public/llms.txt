@@ -1,0 +1,23 @@
+# Synergy UI
+
+> A React component library distributed via the shadcn CLI registry.
+
+## Install
+
+Add any component to your project with:
+
+```bash
+npx shadcn@latest add "https://synergy-shock.github.io/ui/r" synergy/<component-name>
+```
+
+## Components
+
+- **Orb** (`synergy/orb`): An animated orb with audio reactivity, custom colors, and agent state visualization.
+- **Background** (`synergy/background`): An animated background component that smoothly blends a 4-color gradient.
+- **Logo** (`synergy/logo`): The Synergy wordmark logo.
+- **Icon** (`synergy/icon`): The Synergy icon mark.
+
+## Links
+
+- [Documentation](https://synergy-shock.github.io/ui)
+- [GitHub](https://github.com/synergy-shock/ui)
